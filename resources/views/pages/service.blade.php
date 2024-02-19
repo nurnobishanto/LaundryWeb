@@ -10,7 +10,7 @@
                 <div class="col-md-6">
                     <!-- Heading -->
                     <div class="pe-lg-3">
-                        <h1 class="display-4 text-primary">{{$service->name}}</h1>
+                        <h2 class="display-6 text-primary">{{$service->name}}</h2>
                     </div>
                     <!-- End Heading -->
                 </div>
