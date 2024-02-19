@@ -39,17 +39,19 @@
                     <hr>
                     <div class="row mb-5">
                         @foreach($variant->products as $product)
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card text-center border">
-                                <img class="img-fluid w-50 mx-auto" src="{{env('APP_STORAGE_URL').$product->thumbnail->path}}">
-                                <div class="card-body">
-                                    <h6 class="card-title">{{$product->name}}</h6>
-                                    <p>{{$product->description}}</p>
-                                    <p>Tk.{{$product->discount_price}} <del class="text-danger">Tk.{{$product->price}}</del></p>
-                                    <button onclick="addToCart({{$product->id}})" class="btn btn-primary btn-sm">Add to Cart</button>
+                            @if($product->service_id == $service->id)
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="card text-center border">
+                                        <img class="img-fluid w-50 mx-auto" src="{{env('APP_STORAGE_URL').$product->thumbnail->path}}">
+                                        <div class="card-body">
+                                            <h6 class="card-title">{{$product->name}}</h6>
+                                            <p>{{$product->description}}</p>
+                                            <p>Tk.{{$product->discount_price}} <del class="text-danger">Tk.{{$product->price}}</del></p>
+                                            <button onclick="addToCart({{$product->id}})" class="btn btn-primary btn-sm">Add to Cart</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                            @endif
                         @endforeach
                     </div>
                     @endforeach
