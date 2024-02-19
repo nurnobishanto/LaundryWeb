@@ -22,13 +22,13 @@
 
                 <!-- List -->
                 <ul class="list-unstyled list-py-1 mb-0">
-                    <li><a class="link-sm link-light" href="#">How we work</a></li>
-                    <li><a class="link-sm link-light" href="#">Coverage area</a></li>
-                    <li><a class="link-sm link-light" href="#">About us</a></li>
-                    <li><a class="link-sm link-light" href="#">Contact us </a>
+                    <li><a class="link-sm link-light" href="{{route('home')}}#how-it-work">How we work</a></li>
+                    <li><a class="link-sm link-light" href="{{route('home')}}#services">Our Services</a></li>
+                    <li><a class="link-sm link-light" href="{{route('about')}}">About us</a></li>
+                    <li><a class="link-sm link-light" href="{{route('contact')}}">Contact us </a>
                     </li>
-                    <li><a class="link-sm link-light" href="#">Terms of Service</a></li>
-                    <li><a class="link-sm link-light" href="#">Privacy Policy</a></li>
+                    <li><a class="link-sm link-light" href="{{route('terms')}}">Terms of Service</a></li>
+                    <li><a class="link-sm link-light" href="{{route('privacy')}}">Privacy Policy</a></li>
                 </ul>
                 <!-- End List -->
             </div>

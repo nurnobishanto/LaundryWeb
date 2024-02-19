@@ -1,4 +1,7 @@
 @extends('layouts.master')
+@section('seo_meta')
+    <title>Checkout</title>
+@endsection
 @section('content')
     <!-- Hero -->
     <div class="bg-soft-primary-light position-relative overflow-hidden">
@@ -28,148 +31,105 @@
     </div>
     <!-- End Hero -->
 
-    <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="form-title"><h6>Personal Info</h6></div>
+    <div class="container my-3 my-sm-5">
+        <form action="{{route('orderConfirm')}}" method="POST">
+            @csrf
             <div class="row">
-                <div class="col-md-6 mb-4"><label class="m-0">Full name</label>
-                    <input type="text" placeholder="First name" required="required"
-                           aria-required="true" class="form-control" id="__BVID__196"></div>
-                <div class="col-md-6 mb-4"><label class="m-0">Email
-                        Address</label> <input type="email" placeholder="Email Address"
-                                               class="form-control" id="__BVID__197"></div>
-                <div class="col-md-6 mb-4"><label class="m-0">Phone Number</label>
-                    <input type="number" disabled="disabled" placeholder="Phone Number"
-                           class="form-control" id="__BVID__198"></div>
-                <div class="col-md-6 mb-4"><label class="m-0">Alternative Phone
-                        Number</label> <input type="number" placeholder="Alternative Phone Number"
-                                              class="form-control" id="__BVID__199"></div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-title"><h6>Pickup Schedule</h6></div>
-            <div class="row">
-                <div class="col-lg-6 mb-3">
-                    <div role="group"
-                         class="b-form-btn-label-control dropdown b-form-datepicker form-control"
-                         id="__BVID__200__outer_" lang="en-US" aria-labelledby="__BVID__200__value_">
-                        <button type="button" aria-haspopup="dialog" aria-expanded="false" class="btn h-auto"
-                                id="__BVID__200">
-                            <svg viewBox="0 0 16 16" width="1em" height="1em" focusable="false" role="img"
-                                 aria-label="calendar" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                 fill="currentColor" class="bi-calendar b-icon bi">
-                                <g>
-                                    <path
-                                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"></path>
-                                </g>
-                            </svg>
-                        </button><!---->
-                        <div role="dialog" tabindex="-1" aria-modal="false" class="dropdown-menu"
-                             id="__BVID__200__dialog_" aria-labelledby="__BVID__200__value_" style=""><!----></div>
-                        <label class="form-control" id="__BVID__200__value_" for="__BVID__200">Monday, February 19,
-                            2024</label></div> <!----></div>
-                <div class="col-lg-6 mb-3"><select
-                        class="form-control custom-select"
-                        id="__BVID__203">
-                        <option value="" selected="selected" disabled="disabled">-- Select Pick up
-                            slot --
-                        </option>
-                    </select> <!----></div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-title"><h6>Delivery Schedule</h6></div>
-            <div class="row">
-                <div class="col-lg-6 mb-3">
-                    <div id="delivery_date-datepicker__outer_" role="group" aria-disabled="true"
-                         aria-labelledby="delivery_date-datepicker__value_"
-                         class="b-form-btn-label-control dropdown b-form-datepicker form-control" lang="en-US">
-                        <button id="delivery_date-datepicker" type="button" disabled="disabled" aria-haspopup="dialog"
-                                aria-expanded="false" class="btn h-auto">
-                            <svg viewBox="0 0 16 16" width="1em" height="1em" focusable="false" role="img"
-                                 aria-label="calendar" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                 fill="currentColor" class="bi-calendar b-icon bi">
-                                <g>
-                                    <path
-                                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"></path>
-                                </g>
-                            </svg>
-                        </button><!---->
-                        <div id="delivery_date-datepicker__dialog_" role="dialog" tabindex="-1" aria-modal="false"
-                             aria-labelledby="delivery_date-datepicker__value_" class="dropdown-menu"><!----></div>
-                        <label id="delivery_date-datepicker__value_" for="delivery_date-datepicker"
-                               class="form-control text-muted">No date selected</label></div> <!----></div>
-                <div class="col-lg-6 mb-3"><select disabled="disabled"
-                                                   class="form-control custom-select"
-                                                   id="__BVID__212">
-                        <option value="" selected="selected" disabled="disabled">-- Select delivery
-                            slot --
-                        </option>
-                    </select> <!----></div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-title"><h6>Address</h6></div>
-            <div class="row">
-                <div class="col-12 mb-4"><select class="form-control">
-                        <option value="" selected="selected" disabled="disabled">Select Address
-                        </option>
-                        <option id="newAddress" value="new">
-                            Add New
-                        </option>
-                    </select> <!----></div>
-            </div>
-        </div>
-        <div class="col-md-6 mb-4">
-            <div class="form-title"><h6>Your address</h6></div>
-            <div class="row"><!----></div>
-        </div>
-        <div class="col-md-12 mb-4">
-            <div class="form-title"><h6>Additional Instruction:</h6></div>
-            <div class="row">
-                <div class="col-12 mb-4"><textarea
-                        placeholder="For e.g. Call before delivery"
-                        rows="2" wrap="soft" class="form-control"
-                        type="date" id="__BVID__204"></textarea></div>
-            </div>
-        </div>
-        <div class="col-md-12 mb-4">
-            <div class="form-title"><h6>Payment Method</h6></div>
-            <div class="row">
-                <div class="col-md-8 cod mb-4 d-flex align-items-center">
-                    <div class="payment-method-radio"><input id="radioCash"
-                                                             type="radio" value="cashOnDelivery">
-                        <label for="radioCash">
-                            <div class="payment-method"><img
-                                    src="/images/cash-on-delivery.svg"
-                                    height="50" alt="">
-                                <div class="mt-2"><h6 class="m-0 p-0"><strong
-                                        >Cash on Delivery</strong></h6></div>
-                            </div>
-                        </label></div>
-                    <div class="payment-method-radio flex-shrink-0"><input
-                            id="radioStripe"
-                            type="radio"
-                            value="stripe"> <label
-                            for="radioStripe">
-                            <div class="payment-method"><img
-                                    src="/images/stripe.png" height="42"
-                                    alt="">
-                                <div><h6 class="m-0 p-0"><strong
-                                        >Pay Online</strong></h6></div>
-                            </div>
-                        </label></div>
+                <div class="form-group col-md-6">
+                    <label for="full_name">Full Name</label>
+                    <input type="text" value="{{$user->first_name." ".$user->last_name}}" class="form-control" id="full_name" placeholder="Enter your full name" required>
                 </div>
-                <div class="col-md-4 cod mb-4 pt-4">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-primary h-46 w-100">
-                            Place Order
-                        </button>
-                    </div>
+                <div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    <input type="email" value="{{$user->email}}" class="form-control" id="email" placeholder="Enter your email" required>
                 </div>
             </div>
-        </div>
+
+            <div class="row mt-5">
+                <div class="form-group col-md-6">
+                    <label for="pick_date">Pick-up Date</label>
+                    <input type="date" class="form-control" name="pick_date" id="pick_date" min="<?php echo date('Y-m-d'); ?>" onchange="updateTimeOptions('pick_time', this.value); updateMinDeliveryDate(this.value);" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="delivery_date">Delivery Date</label>
+                    <input type="date" class="form-control" id="delivery_date"  name="delivery_date" required>
+                </div>
+            </div>
+
+            <div class="row  mt-5">
+                <div class="form-group col-md-6">
+                    <label for="pick_time">Pick-up Time</label>
+                    <select class="form-control" id="pick_time" name="pick_hour" required>
+                        <!-- Options will be dynamically updated based on pick_date -->
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="delivery_time">Delivery Time</label>
+                    <select class="form-control" id="delivery_time" name="delivery_hour" required>
+                        <!-- Options will be dynamically updated based on delivery_date -->
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group  mt-5">
+                <label for="address_id">Address</label>
+                <select  class="form-control" name="address_id" id="address_id" required>
+                    <option value="" selected disabled>Select an address</option>
+                    @foreach($addresses as $address)
+                    <option value="{{$address->id}}">{{$address->area}} - {{$address->address_name}}(Flat : {{$address->flat_no}}, House: {{$address->house_no}}, Block: {{$address->block}},Road: {{$address->road_no}})</option>
+                    @endforeach
+
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary  my-5 ">Place Order</button>
+        </form>
     </div>
-</div>
+@endsection
+@section('js')
+    <script>
+        // Function to update time options based on the selected date
+        function updateTimeOptions(selectId, selectedDate) {
+            // Clear existing options
+            $('#' + selectId).empty();
+
+            // Get current date and time
+            const currentDate = new Date();
+            let currentTime = currentDate.getHours() + ':' + currentDate.getMinutes();
+
+            // Set minimum time for the current date
+            if (selectedDate === currentDate.toISOString().split('T')[0]) {
+                const currentHour = currentDate.getHours();
+                const currentMinute = currentDate.getMinutes() < 30 ? '30' : '00';
+                currentTime = currentHour + ':' + currentMinute;
+            }
+
+            // Add options based on the selected date
+            for (let i = 8; i < 20; i++) {
+                for (let j = 0; j < 2; j++) {
+                    const time = (i < 10 ? '0' : '') + i + ':' + (j === 0 ? '00' : '30');
+                    if (selectedDate !== currentDate.toISOString().split('T')[0] || time > currentTime) {
+                        $('#' + selectId).append($('<option>', {
+                            value: time,
+                            text: time
+                        }));
+                    }
+                }
+            }
+        }
+
+        // Function to update minimum delivery date based on the pick-up date
+        function updateMinDeliveryDate(pickDate) {
+            const nextDay = new Date(pickDate);
+            nextDay.setDate(nextDay.getDate() + 1);
+            const formattedNextDay = nextDay.toISOString().split('T')[0];
+            $('#delivery_date').attr('min', formattedNextDay);
+
+        }
+
+        // Initialize time options based on current date for pick-up and delivery
+        updateTimeOptions('pick_time', $('#pick_date').val());
+        updateTimeOptions('delivery_time', $('#delivery_date').val());
+    </script>
+
 @endsection

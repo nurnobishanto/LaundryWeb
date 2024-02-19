@@ -24,17 +24,20 @@
                 <div class="navbar-absolute-top-scroller">
                     <ul class="navbar-nav">
                         <!-- Landings -->
-                        <li class="nav-item" >
-                            <a id="" class="nav-link  active" aria-current="page" href="{{route('home')}}" role="button" aria-expanded="false">Home</a>
-                        </li>
+                        <li class="nav-item"> <a id="" class="nav-link " aria-current="page" href="{{route('home')}}" role="button" aria-expanded="false">Home</a></li>
+                        <li class="nav-item"> <a id="" class="nav-link " aria-current="page" href="{{route('home')}}#how-it-work" role="button" aria-expanded="false">How We Work</a></li>
+                        <li class="nav-item"> <a id="" class="nav-link " aria-current="page" href="{{route('home')}}#services" role="button" aria-expanded="false">Our Services</a></li>
+                        <li class="nav-item"> <a id="" class="nav-link " aria-current="page" href="{{route('home')}}#faq" role="button" aria-expanded="false">FAQ</a></li>
+                        <li class="nav-item"> <a id="" class="nav-link " aria-current="page" href="{{route('about')}}" role="button" aria-expanded="false">About</a></li>
+                        <li class="nav-item"> <a id="" class="nav-link " aria-current="page" href="{{route('contact')}}" role="button" aria-expanded="false">Contact</a></li>
                         <!-- End Landings -->
 
 
 
                         <li class="nav-divider"></li>
-                        @if(auth())
+                        @if(auth()->check())
                             <li class="nav-item" >
-                                <a id="" class="nav-link  active" aria-current="page" href="{{route('home')}}" role="button" aria-expanded="false">Profile</a>
+                                <a id="" class="nav-link  active" aria-current="page" href="{{route('profile')}}" role="button" aria-expanded="false">Profile</a>
                             </li>
                         @else
                         <!-- Log in -->

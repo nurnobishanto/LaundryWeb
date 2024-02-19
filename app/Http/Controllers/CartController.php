@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -90,80 +93,62 @@ class CartController extends Controller
             'subtotal' => $subtotal,
         ]);
     }
-//    public function orderConfirm(Request $request){
-//        $request->validate([
-//            'name' => 'required',
-//            'phone' => ['required', 'regex:/^(01|\+8801|8801)[3456789]\d{8}$/'],
-//            'address' => 'required|min:12',
-//            'delivery_zone_id' => 'required',
-//        ]);
-//
-//        if (getSetting('payment_method') == 'show') {
-//            if ($request->payment_method_id === "cod" || $request->payment_method_id === ""){
-//
-//            }else{
-//                $request->validate([
-//                    'payment_method_id' => 'required',
-//                    'trxid' => 'required',
-//                    'paid_amount' => 'required',
-//                    'sent_from' => 'required',
-//                ]);
-//            }
-//        }
-//
-//
-//        $admin =  Admin::first();
-//        $delivery_zone = DeliveryZone::find($request->delivery_zone_id);
-//        $order = Order::create([
-//            'name' => $request->name,
-//            'phone' => $request->phone,
-//            'address' => $request->address,
-//            'order_note' => $request->order_note,
-//            'delivery_zone_id' => $request->delivery_zone_id,
-//            'status' => 'pending',
-//            'subtotal' => 0,
-//            'ip_address' => $request->ip(),
-//            'delivery_charge' => $delivery_zone->charge,
-//            'created_by' => $admin->id,
-//            'updated_by' => $admin->id,
-//        ]);
-//        if (getSetting('payment_method') == 'show' && $request->payment_method_id !== 'cod' && !empty($request->payment_method_id)) {
-//            $order->payment_method_id = $request->payment_method_id;
-//            $order->trxid = $request->trxid;
-//            $order->sent_from = $request->sent_from;
-//            $order->paid_amount = $request->paid_amount;
-//            $order->discount_percent = getSetting('payment_discount');
-//            $order->max_discount = getSetting('payment_max_discount');
-//        }
-//
-//        $cart = session()->get('cart', []);
-//        $subtotal = 0;
-//        $productsWithPivot = [];
-//        foreach ($cart as $productId => $quantity) {
-//            $product = Product::find($productId);
-//            if ($product) {
-//                $product->quantity = $product->quantity -$quantity;
-//                $product->update();
-//                $sub_total = $quantity*$product->price;
-//                $productsWithPivot[] = [
-//                    'product_id' => $productId,
-//                    'order_id' => $order->id,
-//                    'quantity' => $quantity,
-//                    'price' => $product->price,
-//                    'sub_total' => $quantity*$product->price,
-//                ];
-//                $subtotal += $sub_total;
-//            }
-//        }
-//        DB::table('order_product')->insert($productsWithPivot);
-//        $order->subtotal = $subtotal;
-//        $order->update();
-//        $userIp = $request->ip();
-//        $request->session()->put('blocked_ip_' . $userIp, true);
-//
-//        Session()->put('cart',[]);
-//        toastr()->success($order->name.__('global.created_success'),__('global.order').__('global.created'));
-//        return redirect(route('success',['id'=>$order->id]));
-//    }
+    public function orderConfirm(Request $request){
+
+        $request->validate([
+            'pick_date' => 'required',
+            'delivery_date' => 'required',
+            'pick_hour' => 'required',
+            'delivery_hour' => 'required',
+            'address_id' => 'required',
+        ]);
+        $order_code = Order::max('order_code');
+        $customer = Customer::where('user_id',auth()->user()->id)->first();
+        $order = Order::create([
+            'order_code' => sprintf('%06d', $order_code+1),
+            'prefix' => "LM",
+            'customer_id' => $customer->id,
+            'coupon_id' => null,
+            'discount' => 0.0,
+            'pick_date' => $request->pick_date,
+            'delivery_date' => $request->delivery_date,
+            'pick_hour' => $request->pick_hour.':00',
+            'delivery_hour' => $request->delivery_hour.':00',
+            'address_id' => $request->address_id,
+            'amount' => 0,
+            'total_amount' => 0,
+            'payment_status' => 'Pending',
+            'payment_type' => 'Cash on Delivery',
+            'order_status' => 'Pending',
+            'is_show' => 1,
+            'delivery_charge' => 0.0,
+
+        ]);
+
+
+        $cart = session()->get('cart', []);
+        $subtotal = 0;
+        $productsWithPivot = [];
+        foreach ($cart as $productId => $quantity) {
+            $product = Product::find($productId);
+            if ($product) {
+                $sub_total = $quantity*$product->discount_price;
+                $productsWithPivot[] = [
+                    'product_id' => $productId,
+                    'order_id' => $order->id,
+                    'quantity' => $quantity,
+
+                ];
+                $subtotal += $sub_total;
+            }
+        }
+        DB::table('order_products')->insert($productsWithPivot);
+        $order->amount = $subtotal;
+        $order->total_amount = ($subtotal + $order->delivery_charge) - $order->discount;
+        $order->update();
+
+        Session()->put('cart',[]);
+        return redirect(route('profile'));
+    }
 
 }
