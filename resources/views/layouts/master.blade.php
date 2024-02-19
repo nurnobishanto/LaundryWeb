@@ -9,10 +9,17 @@
 
     <!-- Title -->
     @yield('seo_meta')
+    @php
+        $webSetting =  \App\Models\WebSetting::find(1);
+        $logo =  \App\Models\Media::find($webSetting->logo);
+        $fav_icon =  \App\Models\Media::find($webSetting->fav_icon);
 
+    @endphp
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="shortcut icon" href="{{ env('APP_STORAGE_URL') . ($fav_icon->path??'') }}">
+
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">

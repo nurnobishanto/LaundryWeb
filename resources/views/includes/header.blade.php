@@ -1,10 +1,14 @@
+
 <header id="header" class="navbar navbar-expand-lg navbar-end navbar-absolute-top navbar-light">
     <div class="container">
         <nav class="js-mega-menu navbar-nav-wrap">
             <!-- Default Logo -->
-            <a class="navbar-brand" href="{{route('home')}}" aria-label="{{\App\Models\WebSetting::find(1)->title??'ASLaundry'}}">
-                <h5>{{\App\Models\WebSetting::find(1)->title??'ASLaundry'}}</h5>
-{{--                <img class="navbar-brand-logo" src="{{asset('website')}}/svg/logos/logo.svg" alt="Image Description">--}}
+            <a class="navbar-brand" href="{{route('home')}}" aria-label="{{$webSetting->title??'ASLaundry'}}">
+                @if($webSetting->logo)
+                <img class="navbar-brand-logo" src="{{env('APP_STORAGE_URL').$logo->path}}" alt="Image Description">
+                @else
+                <h5>{{$webSetting->title??'ASLaundry'}}</h5>
+                @endif
             </a>
             <!-- End Default Logo -->
 
