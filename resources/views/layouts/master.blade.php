@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Services | Space - Multipurpose Responsive Template</title>
+    @yield('seo_meta')
+
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
@@ -304,7 +305,12 @@
     <i class="bi-chevron-up"></i>
 </a>
 <!-- ========== END SECONDARY CONTENTS ========== -->
+<!-- Include jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+<!-- Include SweetAlert CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.all.min.js"></script>
 <!-- JS Implementing Plugins -->
 <script src="{{asset('website')}}/js/vendor.min.js"></script>
 
@@ -348,6 +354,7 @@
         new HSGoTo('.js-go-to')
     })()
 </script>
+@yield('js')
 </body>
 
 <!-- Mirrored from htmlstream.com/preview/space-v2.3.1/landing-services.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 18 Feb 2024 19:12:48 GMT -->

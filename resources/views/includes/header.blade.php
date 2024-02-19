@@ -2,8 +2,9 @@
     <div class="container">
         <nav class="js-mega-menu navbar-nav-wrap">
             <!-- Default Logo -->
-            <a class="navbar-brand" href="{{route('home')}}" aria-label="Space">
-                <img class="navbar-brand-logo" src="{{asset('website')}}/svg/logos/logo.svg" alt="Image Description">
+            <a class="navbar-brand" href="{{route('home')}}" aria-label="AS Laundry">
+                <h5>AS Laundry</h5>
+{{--                <img class="navbar-brand-logo" src="{{asset('website')}}/svg/logos/logo.svg" alt="Image Description">--}}
             </a>
             <!-- End Default Logo -->
 

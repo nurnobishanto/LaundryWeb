@@ -1,13 +1,17 @@
 @extends('layouts.master')
+@section('seo_meta')
+    <title>Home | Ahmadia Shop and Laundry</title>
+@endsection
 @section('content')
 <!-- Hero -->
 <div class="bg-soft-primary-light position-relative overflow-hidden">
-    <div class="container content-space-t-3 content-space-t-md-4 content-space-b-1 content-space-b-md-3">
-        <div class="row mb-7">
-            <div class="col-md-6">
+    <div class="container content-space-t-2 content-space-t-md-3 content-space-b-1 content-space-b-md-1">
+        <div class="row mb-5">
+            <div class="col-md-7">
                 <!-- Heading -->
                 <div class="pe-lg-3">
-                    <h1 class="display-4 text-primary">Expanding access through <span class="text-warning">technology</span></h1>
+                    <h1 class="display-4 text-primary">Professional Laundry & <span class="text-warning">Dry Cleaning Service</span></h1>
+                    <p>We pickup, clean and return your clean clothes in as little as 24 hours</p>
                 </div>
                 <!-- End Heading -->
             </div>
@@ -27,6 +31,34 @@
     <!-- End SVG Elements -->
 </div>
 <!-- End Hero -->
+<!-- Our Services -->
+<div id="services" class="container content-space-t-1 content-space-t-md-2">
+    <!-- Heading -->
+    <div class="w-lg-65 text-center mx-lg-auto mb-7">
+        <h3>Our Services</h3>
+    </div>
+    <!-- End Heading -->
+
+    <div class="row mb-5 mb-sm-5">
+        @foreach($services as $service)
+        <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
+            <!-- Card -->
+            <div class="card rounded border shadow ">
+                <div class="card-body text-center ">
+                    <img class=" w-50 rounded mx-auto d-block" src="{{env('APP_STORAGE_URL').$service->thumbnail->path}}" alt="{{$service->name}}">
+                    <h5 class="card-title text-center mt-2">{{$service->name}}</h5>
+{{--                    <p>{{$service->description}}</p>--}}
+                    <a href="{{route('service',['id' => $service->id])}}" class="btn btn-outline-info">Get The Service</a>
+                </div>
+            </div>
+            <!-- End Card -->
+        </div>
+        @endforeach
+    </div>
+    <!-- End Row -->
+
+</div>
+<!-- End Blog -->
 
 <!-- Step -->
 <div class="shape-container">
@@ -128,68 +160,6 @@
 
 
 
-<!-- Blog -->
-<div class="container">
-    <!-- Heading -->
-    <div class="w-lg-65 text-center mx-lg-auto mb-7">
-        <h3>Space features</h3>
-        <p class="fs-6">Read how we've helped some great companies brand, design and get to market.</p>
-    </div>
-    <!-- End Heading -->
-
-    <div class="row mb-5 mb-sm-5">
-        <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
-            <!-- Card -->
-            <div class="card h-100 p-2">
-                <img class="card-img" src="{{asset('website')}}/img/600x400/img1.jpg" alt="Image Description">
-                <div class="card-body">
-                    <h5 class="card-title">Attract</h5>
-                    <p class="card-text">This is where we really begin to visualize your napkin sketches and make them into beautiful pixels.</p>
-                    <a class="card-link" href="blog-article.html">Learn about Attract <i class="bi-chevron-right small ms-1"></i></a>
-                </div>
-            </div>
-            <!-- End Card -->
-        </div>
-        <!-- End Col -->
-
-        <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
-            <!-- Card -->
-            <div class="card h-100 p-2">
-                <img class="card-img" src="{{asset('website')}}/img/600x400/img2.jpg" alt="Image Description">
-                <div class="card-body">
-                    <h5 class="card-title">Grow</h5>
-                    <p class="card-text">Now that we've aligned the details, it's time to get things mapped out and organized.</p>
-                    <a class="card-link" href="blog-article.html">Learn about Grow <i class="bi-chevron-right small ms-1"></i></a>
-                </div>
-            </div>
-            <!-- End Card -->
-        </div>
-        <!-- End Col -->
-
-        <div class="col-sm-6 col-lg-4 mb-3 mb-lg-5">
-            <!-- Card -->
-            <div class="card h-100 p-2">
-                <img class="card-img" src="{{asset('website')}}/img/600x400/img3.jpg" alt="Image Description">
-                <div class="card-body">
-                    <h5 class="card-title">Retain</h5>
-                    <p class="card-text">We strive to embrace and drive change in our industry which allows us to keep our clients relevant.</p>
-                    <a class="card-link" href="blog-article.html">Learn about Retain <i class="bi-chevron-right small ms-1"></i></a>
-                </div>
-            </div>
-            <!-- End Card -->
-        </div>
-        <!-- End Col -->
-    </div>
-    <!-- End Row -->
-
-    <!-- Info -->
-    <div class="text-center">
-        <p class="mb-0">Want to read more?</p>
-        <a class="link" href="blog-classic.html">Explore Space news <i class="bi-chevron-right small ms-1"></i></a>
-    </div>
-    <!-- End Info -->
-</div>
-<!-- End Blog -->
 
 <!-- Contact -->
 <div class="container content-space-1 content-space-t-md-3">
