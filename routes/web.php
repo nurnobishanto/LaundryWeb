@@ -27,6 +27,8 @@ Route::get('/privacy', [App\Http\Controllers\WebsiteController::class, 'privacy'
 Route::get('/terms', [App\Http\Controllers\WebsiteController::class, 'terms'])->name('terms');
 Route::get('/service/{id}', [App\Http\Controllers\WebsiteController::class, 'service'])->name('service');
 Route::get('/profile',[\App\Http\Controllers\WebsiteController::class,'profile'])->name('profile')->middleware('auth');
+Route::get('/my-address',[\App\Http\Controllers\WebsiteController::class,'my_address'])->name('my_address')->middleware('auth');
+Route::get('/my-orders',[\App\Http\Controllers\WebsiteController::class,'my_orders'])->name('my_orders')->middleware('auth');
 Route::post('/add-address',[\App\Http\Controllers\WebsiteController::class,'add_address'])->name('add_address')->middleware('auth');
 Route::get('checkout',[\App\Http\Controllers\WebsiteController::class,'checkout'])->name('checkout')->middleware('auth');
 

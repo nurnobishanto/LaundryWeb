@@ -56,6 +56,20 @@ class WebsiteController extends Controller
         $data['orders'] = Order::where('customer_id',$customer->id)->get();
         return view('pages.profile', $data);
     }
+    public function my_address(){
+        $data =  array();
+        $customer = Customer::where('user_id',auth()->user()->id)->first();
+        $data['user'] = auth()->user();
+        $data['areas'] = Area::all();
+        $data['addresses'] = Address::where('customer_id',$customer->id)->get();
+        return view('pages.my-address', $data);
+    }
+    public function my_orders(){
+        $data =  array();
+        $customer = Customer::where('user_id',auth()->user()->id)->first();
+        $data['orders'] = Order::where('customer_id',$customer->id)->get();
+        return view('pages.my_orders', $data);
+    }
     public function checkout(){
         $data =  array();
         $customer = Customer::where('user_id',auth()->user()->id)->first();

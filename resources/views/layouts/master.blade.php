@@ -63,22 +63,67 @@
                            "groupName": "idForm"
                          }'>Sign up here</a>
                         </p>
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+
+                            <div class="row mb-3">
+                                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6 offset-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                        <label class="form-check-label" for="remember">
+                                            {{ __('Remember Me') }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-0">
+                                <div class="col-md-8 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Login') }}
+                                    </button>
+
+                                    @if (Route::has('password.request'))
+                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                            {{ __('Forgot Your Password?') }}
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+                        </form>
                     </div>
+
                     <!-- End Heading -->
 
-                    <div class="d-grid gap-2">
-                        <a class="btn btn-white btn-lg" href="#">
-                <span class="d-flex justify-content-center align-items-center">
-                  <img class="avatar avatar-xss me-2" src="{{asset('website')}}/svg/brands/google-icon.svg" alt="Image Description">
-                  Log in with Google
-                </span>
-                        </a>
-
-                        <a class="js-animation-link btn btn-primary btn-lg" href="#" data-hs-show-animation-options='{
-                         "targetSelector": "#signupModalFormLoginWithEmail",
-                         "groupName": "idForm"
-                       }'>Log in with Email</a>
-                    </div>
                 </div>
                 <!-- End Log in -->
 
@@ -142,23 +187,93 @@
                     </div>
                     <!-- End Heading -->
 
-                    <div class="d-grid gap-3">
-                        <a class="btn btn-white btn-lg" href="#">
-                <span class="d-flex justify-content-center align-items-center">
-                  <img class="avatar avatar-xss me-2" src="{{asset('website')}}/svg/brands/google-icon.svg" alt="Image Description">
-                  Sign up with Google
-                </span>
-                        </a>
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
 
-                        <a class="js-animation-link btn btn-primary btn-lg" href="#" data-hs-show-animation-options='{
-                         "targetSelector": "#signupModalFormSignupWithEmail",
-                         "groupName": "idForm"
-                       }'>Sign up with Email</a>
+                        <div class="row mb-3">
+                            <label for="first_name" class="col-md-4 col-form-label text-md-end">{{ __('Fist Name') }}</label>
 
-                        <div class="text-center">
-                            <p class="small mb-0">By continuing you agree to our <a href="page-terms.html">Terms and Conditions</a></p>
+                            <div class="col-md-6">
+                                <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
+
+                                @error('first_name')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
+                        <div class="row mb-3">
+                            <label for="last_name" class="col-md-4 col-form-label text-md-end">{{ __('Last Name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
+
+                                @error('last_name')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="mobile" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="mobile" type="mobile" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile">
+
+                                @error('mobile')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <!-- End Sign up -->
 
@@ -253,36 +368,6 @@
             </div>
             <!-- End Body -->
 
-            <!-- Footer -->
-            <div class="modal-footer d-block text-center py-sm-5">
-                <small class="text-cap mb-4">Trusted by the world's best teams</small>
-
-                <div class="w-85 mx-auto">
-                    <div class="row justify-content-between">
-                        <div class="col">
-                            <img class="img-fluid" src="{{asset('website')}}/svg/brands/gitlab-gray.svg" alt="Logo">
-                        </div>
-                        <!-- End Col -->
-
-                        <div class="col">
-                            <img class="img-fluid" src="{{asset('website')}}/svg/brands/fitbit-gray.svg" alt="Logo">
-                        </div>
-                        <!-- End Col -->
-
-                        <div class="col">
-                            <img class="img-fluid" src="{{asset('website')}}/svg/brands/flow-xo-gray.svg" alt="Logo">
-                        </div>
-                        <!-- End Col -->
-
-                        <div class="col">
-                            <img class="img-fluid" src="{{asset('website')}}/svg/brands/layar-gray.svg" alt="Logo">
-                        </div>
-                        <!-- End Col -->
-                    </div>
-                </div>
-                <!-- End Row -->
-            </div>
-            <!-- End Footer -->
         </div>
     </div>
 </div>

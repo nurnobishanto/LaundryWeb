@@ -32,13 +32,25 @@
                         <li class="nav-item"> <a id="" class="nav-link " aria-current="page" href="{{route('contact')}}" role="button" aria-expanded="false">Contact</a></li>
                         <!-- End Landings -->
 
-
-
                         <li class="nav-divider"></li>
                         @if(auth()->check())
-                            <li class="nav-item" >
-                                <a id="" class="nav-link  active" aria-current="page" href="{{route('profile')}}" role="button" aria-expanded="false">Profile</a>
+                            <li class="hs-has-sub-menu nav-item">
+                                <a id="blogMegaMenu" class="hs-mega-menu-invoker nav-link dropdown-toggle " href="#" role="button" aria-expanded="false">{{auth()->user()->first_name}}</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                                <!-- Mega Menu -->
+                                <div class="hs-sub-menu dropdown-menu" aria-labelledby="blogMegaMenu" style="min-width: 12rem;">
+                                    <a class="dropdown-item " href="{{route('profile')}}"> Profile</a>
+                                    <a class="dropdown-item " href="{{route('my_address')}}">Address</a>
+                                    <a class="dropdown-item " href="{{route('my_orders')}}">My Orders</a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Logout</a>
+
+                                </div>
+                                <!-- End Mega Menu -->
                             </li>
+
                         @else
                         <!-- Log in -->
                         <li class="nav-item">

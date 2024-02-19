@@ -20,10 +20,23 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name',
         'last_name',
+        'mobile',
         'email',
         'password',
     ];
+    protected static function boot()
+    {
+        parent::boot();
 
+        // Listen for the 'created' event
+        static::created(function ($user) {
+            // Automatically create a customer record when a user is created
+            Customer::create([
+                'user_id' => $user->id,
+                // Add other customer-related columns as needed
+            ]);
+        });
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
