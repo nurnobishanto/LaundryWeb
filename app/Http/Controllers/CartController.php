@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\DeliveryCost;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -76,9 +77,9 @@ class CartController extends Controller
                     'product_id' => $productId,
                     'name' => $product->name,
                     'image' => env('APP_STORAGE_URL').$product->thumbnail->path,
-                    'price' => $product->price,
+                    'price' => $product->discount_price,
                     'quantity' => $quantity,
-                    'total' => $product->price * $quantity,
+                    'total' => $product->discount_price * $quantity,
 
                 ];
                 $cartList[] = $cartItem;
@@ -87,10 +88,33 @@ class CartController extends Controller
             }
         }
 
+        $dc = DeliveryCost::find(1);
+        $delivery_charge = 0;
+        $minimum_order = 0;
+        $canOrder = true;
+        if ($dc){
+            $delivery_charge = $dc->cost;
+            if ($dc->fee_cost < $subtotal){
+                $delivery_charge = 0;
+            }
+            if ($dc->minimum_cost){
+                $minimum_order = $dc->minimum_cost;
+                $canOrder = false;
+                if ($subtotal >= $minimum_order){
+                    $canOrder = true;
+                }
+
+            }
+        }
+
         return response()->json([
             'cartList' => $cartList,
             'totalItemCount' => $totalItemCount,
             'subtotal' => $subtotal,
+            'delivery_charge' => $delivery_charge,
+            'payable_amount' =>$subtotal + $delivery_charge,
+            'minimum_order' => $minimum_order,
+            'canOrder' => $canOrder,
         ]);
     }
     public function orderConfirm(Request $request){
@@ -122,7 +146,6 @@ class CartController extends Controller
             'order_status' => 'Pending',
             'is_show' => 1,
             'delivery_charge' => 0.0,
-
         ]);
 
 
@@ -142,9 +165,18 @@ class CartController extends Controller
                 $subtotal += $sub_total;
             }
         }
+        $dc = DeliveryCost::find(1);
+        $delivery_charge = 0;
+        if ($dc){
+            $delivery_charge = $dc->cost;
+            if ($dc->fee_cost < $subtotal){
+                $delivery_charge = 0;
+            }
+        }
         DB::table('order_products')->insert($productsWithPivot);
         $order->amount = $subtotal;
-        $order->total_amount = ($subtotal + $order->delivery_charge) - $order->discount;
+        $order->delivery_charge = $delivery_charge;
+        $order->total_amount = ($subtotal + $delivery_charge) - $order->discount;
         $order->update();
 
         Session()->put('cart',[]);

@@ -43,32 +43,19 @@
 
         <div class="row align-items-md-end py-5">
             <div class="col-md mb-3 mb-md-0">
-                <p class="text-white mb-0">© Space. {{date('Y')}} ASLaundry. All rights reserved.</p>
+                <p class="text-white mb-0">© Space. {{date('Y')}} {{\App\Models\WebSetting::find(1)->title??'ASLaundry'}}. All rights reserved.</p>
             </div>
 
             <div class="col-md d-md-flex justify-content-md-end">
                 <!-- Socials -->
                 <ul class="list-inline mb-0">
+                    @foreach(\App\Models\SocialLink::all() as $sl)
                     <li class="list-inline-item">
-                        <a class="btn btn-icon btn-sm btn-soft-light rounded-circle" href="#">
-                            <i class="bi-facebook"></i>
+                        <a class="btn btn-icon btn-sm btn-soft-light rounded-circle" href="{{$sl->url}}">
+                            <img src="{{env('APP_STORAGE_URL').$sl->media->path}}" alt="{{$sl->name}}">
                         </a>
                     </li>
-                    <li class="list-inline-item">
-                        <a class="btn btn-icon btn-sm btn-soft-light rounded-circle" href="#">
-                            <i class="bi-twitter"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="btn btn-icon btn-sm btn-soft-light rounded-circle" href="#">
-                            <i class="bi-github"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="btn btn-icon btn-sm btn-soft-light rounded-circle" href="#">
-                            <i class="bi-slack"></i>
-                        </a>
-                    </li>
+                    @endforeach
                 </ul>
                 <!-- End Socials -->
             </div>

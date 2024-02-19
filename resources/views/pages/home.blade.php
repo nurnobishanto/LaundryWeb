@@ -273,7 +273,7 @@
               </span>
 
                         <h5 class="text-white">Visit us:</h5>
-                        <p class="text-white-70 mb-0">153 Williamson Plaza, Maggieberg</p>
+                        <p class="text-white-70 mb-0">{{\App\Models\WebSetting::find(1)->address??'Dhaka, Bangladesh'}}</p>
                     </div>
                     <!-- End Info -->
                 </div>
@@ -292,7 +292,7 @@
               </span>
 
                         <h5 class="text-white">Call us:</h5>
-                        <p class="text-white-70 mb-0">+1 (062) 109-9222</p>
+                        <p class="text-white-70 mb-0">{{\App\Models\WebSetting::find(1)->mobile??'+88017XX-XXXXXX'}}</p>
                     </div>
                     <!-- End Info -->
                 </div>
@@ -314,7 +314,7 @@
               </span>
 
                         <h5 class="text-white">Email us:</h5>
-                        <p class="text-white-70 mb-0">example@site.com</p>
+                        <p class="text-white-70 mb-0">support@ahmadiashopandlaundry.com</p>
                     </div>
                     <!-- End Info -->
                 </div>

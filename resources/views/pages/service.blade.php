@@ -75,9 +75,8 @@
                     if (response.totalItemCount > 0 ) {
                         $('.cart-empty').addClass('d-none')
                         $('.cart-empty').removeClass('d-block')
-
                         $('.cart-count').text(response.totalItemCount)
-                        updateCartInfo(response.cartList, response.totalItemCount, response.subtotal)
+                        updateCartInfo(response.cartList, response.totalItemCount, response.subtotal, response.canOrder, response.minimum_order, response.delivery_charge, response.payable_amount)
 
                     } else {
                         $('.cart-empty').addClass('d-block')
@@ -96,7 +95,7 @@
             });
 
         }
-        function updateCartInfo(cartList, totalItemCount, subtotal) {
+        function updateCartInfo(cartList, totalItemCount, subtotal, canOrder, minimum_order, delivery_charge, payable_amount) {
             // Update your HTML elements or template here to display the cart information
             // Example: Update a cart table, total count, and subtotal
             $('.cart-list').html('');
@@ -137,10 +136,21 @@
 
             });
             $('.cart-list').append('<div class="text-end fw-bold mt-2 px-3">Sub Total : Tk.<span class="product_sub_total">'+subtotal+'</span></div>');
-            $('.cart-button').append(' <div class="d-flex justify-content-between mt-4">' +
-                '<a href="{{route('home')}}" class="btn btn-success">Continue Shopping</a>' +
-                '<a href="{{route('checkout')}}" class="btn btn-danger">Checkout</a>' +
-                '</div>');
+            $('.cart-list').append('<div class="text-end fw-bold mt-2 px-3">Delivery Charge : Tk.<span class="product_sub_total">'+delivery_charge+'</span></div>');
+            $('.cart-list').append('<hr>');
+            $('.cart-list').append('<div class="text-end fw-bold mt-2 px-3">Payble Amount : Tk.<span class="product_sub_total">'+payable_amount+'</span></div>');
+            if(canOrder){
+                $('.cart-button').append(' <div class="d-flex justify-content-between mt-4">' +
+                    '<a href="{{route('home')}}" class="btn btn-success">Continue Shopping</a>' +
+                    '<a href="{{route('checkout')}}" class="btn btn-danger">Checkout</a>' +
+                    '</div>');
+            }else {
+                $('.cart-button').append(' <div class="d-flex justify-content-between mt-4">' +
+                    '<span  class="text-danger">Minimum Order value : '+minimum_order+'</span>' +
+                    '</div>');
+            }
+
+
             updateTotal();
 
         }
