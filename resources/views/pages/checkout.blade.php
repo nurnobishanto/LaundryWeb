@@ -134,8 +134,8 @@
         }
 
         // Initialize time options based on current date for pick-up and delivery
-        updateTimeOptions('pick_time', $('#pick_date').val());
-        updateTimeOptions('delivery_time', $('#delivery_date').val());
+        //updateTimeOptions('pick_time', $('#pick_date').val());
+        //updateTimeOptions('delivery_time', $('#delivery_date').val());
     </script>
 
 @endsection
