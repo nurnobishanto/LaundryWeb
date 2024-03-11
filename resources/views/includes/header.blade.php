@@ -5,7 +5,7 @@
             <!-- Default Logo -->
             <a class="navbar-brand" href="{{route('home')}}" aria-label="{{$webSetting->title??'ASLaundry'}}">
                 @if($webSetting->logo)
-                <img class="navbar-brand-logo" src="{{env('APP_STORAGE_URL').$logo->path}}" alt="Image Description">
+                <img class="navbar-brand-logo" style="max-height: 80px" src="{{env('APP_STORAGE_URL').$logo->path}}" alt="{{$webSetting->title??'ASLaundry'}}"">
                 @else
                 <h5>{{$webSetting->title??'ASLaundry'}}</h5>
                 @endif
