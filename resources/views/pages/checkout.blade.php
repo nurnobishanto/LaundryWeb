@@ -48,7 +48,7 @@
             <div class="row mt-5">
                 <div class="form-group col-md-6">
                     <label for="pick_date">Pick-up Date</label>
-                    <input type="date" class="form-control" name="pick_date" id="pick_date" min="<?php echo date('Y-m-d'); ?>" onchange="updateTimeOptions('pick_time', this.value); updateMinDeliveryDate(this.value);" required>
+                    <input type="date" class="form-control" name="pick_date" id="pick_date" min="<?php echo date('Y-m-d'); ?>" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="delivery_date">Delivery Date</label>
