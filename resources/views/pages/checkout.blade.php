@@ -61,12 +61,18 @@
                     <label for="pick_time">Pick-up Time</label>
                     <select class="form-control" id="pick_time" name="pick_hour" required>
                         <!-- Options will be dynamically updated based on pick_date -->
+                        <option value="">9:00AM - 12:00AM</option>
+                        <option value="">2:00PM - 4:00PM</option>
+                        <option value="">6:00PM - 8:00PM</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="delivery_time">Delivery Time</label>
                     <select class="form-control" id="delivery_time" name="delivery_hour" required>
                         <!-- Options will be dynamically updated based on delivery_date -->
+                        <option value="">9:00AM - 12:00AM</option>
+                        <option value="">2:00PM - 4:00PM</option>
+                        <option value="">6:00PM - 8:00PM</option>
                     </select>
                 </div>
             </div>

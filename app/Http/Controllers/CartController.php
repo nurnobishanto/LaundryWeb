@@ -73,13 +73,15 @@ class CartController extends Controller
             $product = Product::find($productId);
 
             if ($product) {
+
+                $pr_price = $product->discount_price??$product->price;
                 $cartItem = [
                     'product_id' => $productId,
                     'name' => $product->name,
                     'image' => env('APP_STORAGE_URL').$product->thumbnail->path,
-                    'price' => $product->discount_price,
+                    'price' => $pr_price,
                     'quantity' => $quantity,
-                    'total' => $product->discount_price * $quantity,
+                    'total' => $pr_price * $quantity,
 
                 ];
                 $cartList[] = $cartItem;

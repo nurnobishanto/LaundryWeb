@@ -46,7 +46,11 @@
                                         <div class="card-body">
                                             <h6 class="card-title">{{$product->name}}</h6>
                                             <p>{{$product->description}}</p>
+                                            @if($product->discount_price)
                                             <p>Tk.{{$product->discount_price}} <del class="text-danger">Tk.{{$product->price}}</del></p>
+                                            @else
+                                            <p>Tk.{{$product->price}}</p>
+                                            @endif
                                             <button onclick="addToCart({{$product->id}})" class="btn btn-primary btn-sm">Add to Cart</button>
                                         </div>
                                     </div>
