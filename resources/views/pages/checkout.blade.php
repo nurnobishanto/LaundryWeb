@@ -127,7 +127,7 @@
         // Function to update minimum delivery date based on the pick-up date
         function updateMinDeliveryDate(pickDate) {
             const nextDay = new Date(pickDate);
-            nextDay.setDate(nextDay.getDate() + 1);
+            nextDay.setDate(nextDay.getDate() + 2);
             const formattedNextDay = nextDay.toISOString().split('T')[0];
             $('#delivery_date').attr('min', formattedNextDay);
 
