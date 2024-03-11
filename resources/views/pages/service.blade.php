@@ -37,7 +37,7 @@
                     @foreach($service->variants as $variant)
                     <h5>{{$variant->name}}</h5>
                     <hr>
-                    <div class="row mb-5">
+                    <div class="row gy-2 mb-5">
                         @foreach($variant->products as $product)
                             @if($product->service_id == $service->id)
                                 <div class="col-md-4 col-sm-6">
