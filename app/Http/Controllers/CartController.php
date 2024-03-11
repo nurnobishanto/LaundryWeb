@@ -157,7 +157,8 @@ class CartController extends Controller
         foreach ($cart as $productId => $quantity) {
             $product = Product::find($productId);
             if ($product) {
-                $sub_total = $quantity*$product->discount_price;
+                $pr_price = $product->discount_price??$product->price;
+                $sub_total = $quantity*$pr_price;
                 $productsWithPivot[] = [
                     'product_id' => $productId,
                     'order_id' => $order->id,
